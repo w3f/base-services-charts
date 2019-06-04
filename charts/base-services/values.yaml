@@ -1,1 +1,7 @@
+environment: ci
+
 domain: web3.foundation
+
+grafanaPassword: password
+
+digitalOceanToken: token
