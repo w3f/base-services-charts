@@ -1,0 +1,19 @@
+{{ if ne .Values.environment "ci" }}
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: w3f
+  namespace: default
+spec:
+  secretName: w3f-tls
+  issuerRef:
+    name: letsencrypt
+  dnsNames:
+  - grafana.{{ .Values.domain }}
+  acme:
+    config:
+    - dns01:
+        provider: prod-dns
+      domains:
+      - grafana.{{ .Values.domain }}
+{{ end }}

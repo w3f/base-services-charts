@@ -1,0 +1,8 @@
+environments:
+  production:
+  ci:
+
+releases:
+- name: cert-manager
+  chart: stable/cert-manager
+  version: v0.6.6

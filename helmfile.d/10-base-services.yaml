@@ -1,0 +1,19 @@
+environments:
+  production:
+  ci:
+
+releases:
+- name: base-services
+  chart: ../charts/base-services
+  values:
+  - environment: {{ .Environment.Name }}
+  - grafanaPassword: {{ env "GRAFANA_PASSWORD" | default "admin" }}
+  - cloudflareApiKey: {{ env "CLOUDFLARE_API_KEY" | default "" }}
+  - digitalOceanToken: {{ env "DIGITALOCEAN_ACCESS_TOKEN" | default "token" }}
+  - spacesAccessToken: {{ env "SPACES_ACCESS_TOKEN" | default "spaces_access_token" }}
+  - spacesSecretKey: {{ env "SPACES_SECRET_KEY" | default "spaces_secret_key" }}
+- name: nginx-ingress
+  chart: stable/nginx-ingress
+  version: 1.4.0
+  values:
+  - ./config/nginx-ingress-values.yaml.gotmpl

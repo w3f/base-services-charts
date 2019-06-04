@@ -1,0 +1,12 @@
+environments:
+  production:
+  ci:
+
+releases:
+- name: grafana
+  chart: stable/grafana
+  version: 2.3.5
+  values:
+  - ./config/grafana-values.yaml.gotmpl
+- name: loki
+  chart: ../charts/loki
