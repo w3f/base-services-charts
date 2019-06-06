@@ -2,6 +2,10 @@ environments:
   production:
   ci:
 
+repositories:
+- name: loki
+  url: https://grafana.github.io/loki/charts
+
 releases:
 - name: grafana
   chart: stable/grafana
@@ -9,4 +13,5 @@ releases:
   values:
   - ./config/grafana-values.yaml.gotmpl
 - name: loki
-  chart: ../charts/loki
+  chart: loki/loki-stack
+  version: 0.11.0
