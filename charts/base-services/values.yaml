@@ -4,4 +4,11 @@ domain: web3.foundation
 
 grafanaPassword: password
 
+cloudflareApiKey: ""
+
 digitalOceanToken: token
+spacesAccessToken: spaces_access_token
+spacesSecretKey: spaces_secret_key
+
+alertRules:
+  create: true
