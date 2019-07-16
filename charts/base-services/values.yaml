@@ -2,7 +2,12 @@ environment: ci
 
 domain: web3.foundation
 
-grafanaPassword: password
+grafana:
+  enabled: true
+  password: password
+
+ark:
+  enabled: true
 
 cloudflareApiKey: ""
 
