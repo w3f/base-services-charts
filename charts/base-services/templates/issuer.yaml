@@ -1,5 +1,5 @@
 {{ if ne .Values.environment "ci" }}
-apiVersion: certmanager.k8s.io/v1alpha1
+apiVersion: cert-manager.io/v1alpha2
 kind: Issuer
 metadata:
   name: letsencrypt
@@ -12,12 +12,11 @@ spec:
     privateKeySecretRef:
       name: letsencrypt
 
-    dns01:
-      providers:
-        - name: prod-dns
-          cloudflare:
-            email: cloudflare@web3.foundation
-            apiKeySecretRef:
-              name: cloudflare-credentials
-              key: api-key
+    solvers:
+    - dns01:
+        cloudflare:
+          email: cloudflare@web3.foundation
+          apiKeySecretRef:
+            name: cloudflare-credentials
+            key: api-key
 {{ end }}
