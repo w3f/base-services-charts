@@ -42,17 +42,54 @@ alertmanager:
   config:
     global:
       resolve_timeout: 5m
+      opsgenie_api_url: {{ env "OPSGENIE_API_URL" | default "https://api.eu.opsgenie.com/" }}
+      opsgenie_api_key: {{ env "OPSGENIE_TOKEN" | default "opsgenie_token" }}
     route:
-      group_by: ['alertname']
+      group_by: ['alertname', 'priority']
       group_wait: 30s
       group_interval: 5m
       repeat_interval: 12h
-      receiver: 'webhook'
-      routes: []
+      receiver: default
+      routes:
+{{ if ne .Environment.Name "ci" }}
+      - receiver: heartbeats
+        match:
+          severity: heartbeat
+        group_wait: 1s
+        group_interval: 1m
+        repeat_interval: 50s
+      - receiver: opsgenie
+        match:
+          severity: critical
+        continue: true
+{{ end }}
+      - receiver: watcher
+        match:
+          app: polkadot-watcher
+        continue: true
+      - receiver: default
+
     receivers:
-    - name: 'webhook'
+    - name: default
       webhook_configs:
       - url:  "http://matrixbot:8080/skill/alertmanager/webhook"
+    - name: watcher
+      webhook_configs:
+      - url:  "http://watcher-matrixbot:8080/skill/alertmanager/webhook"
+{{ if ne .Environment.Name "ci" }}
+    - name: heartbeats
+      webhook_configs:
+      - url: https://api.eu.opsgenie.com/v2/alerts/v2/heartbeats/engineering/ping'
+        send_resolved: true
+        http_config:
+          basic_auth:
+            password: {{ env "OPSGENIE_TOKEN" | default "opsgenie_token" }}
+    - name: opsgenie
+      opsgenie_configs:
+      - api_url:
+        api_key:
+        message: New Alert
+{{ end }}
 {{ if ne .Environment.Name "ci" }}
   alertmanagerSpec:
     resources:
