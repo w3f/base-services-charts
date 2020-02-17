@@ -4,5 +4,6 @@ environments:
 
 releases:
 - name: cert-manager
-  chart: stable/cert-manager
-  version: v0.6.6
+  namespace: cert-manager
+  chart: jetstack/cert-manager  # https://cert-manager.io/docs/installation/kubernetes/#installing-with-helm
+  version: v0.13.0  # Update has dependency in scripts/preflight.sh
