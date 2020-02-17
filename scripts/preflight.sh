@@ -1,5 +1,8 @@
-#!/bin/sh
+echo Preflight start
+PS4='$LINENO: '
+set -x
+kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/v0.13.0/deploy/manifests/00-crds.yaml
+kubectl create namespace cert-manager || true
 
-kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.6/deploy/manifests/00-crds.yaml
-
-kubectl label namespace default certmanager.k8s.io/disable-validation="true" --overwrite=true
+set +x
+echo Preflight end
