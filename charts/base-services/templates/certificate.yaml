@@ -10,10 +10,4 @@ spec:
     name: letsencrypt
   dnsNames:
   - grafana.{{ .Values.domain }}
-  acme:
-    config:
-    - dns01:
-        provider: prod-dns
-      domains:
-      - grafana.{{ .Values.domain }}
 {{ end }}
