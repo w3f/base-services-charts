@@ -1,6 +1,0 @@
-{{ if .Values.ark.enabled }}
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: heptio-ark
-{{ end }}
