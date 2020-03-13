@@ -6,9 +6,6 @@ grafana:
   enabled: true
   password: password
 
-ark:
-  enabled: true
-
 cloudflareApiKey: ""
 
 digitalOceanToken: token
