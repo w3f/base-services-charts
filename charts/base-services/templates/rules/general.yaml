@@ -16,7 +16,7 @@ spec:
       for: 10m
       labels:
         severity: warning
-    - alert: TargetDown long
+    - alert: TargetDownLong
       annotations:
         message: '{{`{{ $value }}`}}% of the {{`{{ $labels.job }}`}} targets are down.'
       expr: 100 * (count(up == 0) BY (job) / count(up) BY (job)) > 10
