@@ -1,16 +1,11 @@
 environment: ci
 
-domain: web3.foundation
-
 grafana:
   enabled: true
   password: password
+  domain: web3.foundation
 
 cloudflareApiKey: ""
-
-digitalOceanToken: token
-spacesAccessToken: spaces_access_token
-spacesSecretKey: spaces_secret_key
 
 alertRules:
   create: true
