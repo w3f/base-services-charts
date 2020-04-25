@@ -9,10 +9,10 @@ metadata:
 spec:
   tls:
   - hosts:
-      - grafana.{{ .Values.domain }}
+      - grafana.{{ .Values.grafana.domain }}
     secretName: w3f-tls
   rules:
-  - host: grafana.{{ .Values.domain }}
+  - host: grafana.{{ .Values.grafana.domain }}
     http:
       paths:
       - path: /
