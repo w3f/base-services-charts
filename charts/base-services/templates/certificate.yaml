@@ -9,5 +9,5 @@ spec:
   issuerRef:
     name: letsencrypt
   dnsNames:
-  - grafana.{{ .Values.domain }}
+  - grafana.{{ .Values.grafana.domain }}
 {{ end }}
