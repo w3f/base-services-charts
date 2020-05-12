@@ -12,365 +12,195 @@ spec:
     rules:
     - expr: node_bcache_cache_read_races
       record: node_bcache_cache_read_races_total
-      labels:
-        origin: {{ .Values.origin }}
   - name: node_exporter-16-buddyinfo
     rules:
     - expr: node_buddyinfo_blocks
       record: node_buddyinfo_count
-      labels:
-        origin: {{ .Values.origin }}
   - name: node_exporter-16-stat
     rules:
     - expr: node_boot_time_seconds
       record: node_boot_time
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_context_switches_total
       record: node_context_switches
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_forks_total
       record: node_forks
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_intr_total
       record: node_intr
-      labels:
-        origin: {{ .Values.origin }}
   - name: node_exporter-16-cpu
     rules:
     - expr: label_replace(node_cpu_seconds_total, "cpu", "$1", "cpu", "cpu(.+)")
       record: node_cpu
-      labels:
-        origin: {{ .Values.origin }}
   - name: node_exporter-16-diskstats
     rules:
     - expr: node_disk_read_bytes_total
       record: node_disk_bytes_read
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_disk_written_bytes_total
       record: node_disk_bytes_written
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_disk_io_time_seconds_total * 1000
       record: node_disk_io_time_ms
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_disk_io_time_weighted_seconds_total
       record: node_disk_io_time_weighted
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_disk_reads_completed_total
       record: node_disk_reads_completed
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_disk_reads_merged_total
       record: node_disk_reads_merged
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_disk_read_time_seconds_total * 1000
       record: node_disk_read_time_ms
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_disk_writes_completed_total
       record: node_disk_writes_completed
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_disk_writes_merged_total
       record: node_disk_writes_merged
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_disk_write_time_seconds_total * 1000
       record: node_disk_write_time_ms
-      labels:
-        origin: {{ .Values.origin }}
   - name: node_exporter-16-filesystem
     rules:
     - expr: node_filesystem_free_bytes
       record: node_filesystem_free
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_filesystem_avail_bytes
       record: node_filesystem_avail
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_filesystem_size_bytes
       record: node_filesystem_size
-      labels:
-        origin: {{ .Values.origin }}
   - name: node_exporter-16-infiniband
     rules:
     - expr: node_infiniband_port_data_received_bytes_total
       record: node_infiniband_port_data_received_bytes
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_infiniband_port_data_transmitted_bytes_total
       record: node_infiniband_port_data_transmitted_bytes
-      labels:
-        origin: {{ .Values.origin }}
   - name: node_exporter-16-interrupts
     rules:
     - expr: node_interrupts_total
       record: node_interrupts
-      labels:
-        origin: {{ .Values.origin }}
   - name: node_exporter-16-memory
     rules:
     - expr: node_memory_Active_bytes
       record: node_memory_Active
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Active_anon_bytes
       record: node_memory_Active_anon
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Active_file_bytes
       record: node_memory_Active_file
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_AnonHugePages_bytes
       record: node_memory_AnonHugePages
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_AnonPages_bytes
       record: node_memory_AnonPages
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Bounce_bytes
       record: node_memory_Bounce
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Buffers_bytes
       record: node_memory_Buffers
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Cached_bytes
       record: node_memory_Cached
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_CommitLimit_bytes
       record: node_memory_CommitLimit
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Committed_AS_bytes
       record: node_memory_Committed_AS
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_DirectMap2M_bytes
       record: node_memory_DirectMap2M
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_DirectMap4k_bytes
       record: node_memory_DirectMap4k
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Dirty_bytes
       record: node_memory_Dirty
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_HardwareCorrupted_bytes
       record: node_memory_HardwareCorrupted
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Hugepagesize_bytes
       record: node_memory_Hugepagesize
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Inactive_bytes
       record: node_memory_Inactive
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Inactive_anon_bytes
       record: node_memory_Inactive_anon
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Inactive_file_bytes
       record: node_memory_Inactive_file
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_KernelStack_bytes
       record: node_memory_KernelStack
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Mapped_bytes
       record: node_memory_Mapped
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_MemAvailable_bytes
       record: node_memory_MemAvailable
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_MemFree_bytes
       record: node_memory_MemFree
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_MemTotal_bytes
       record: node_memory_MemTotal
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Mlocked_bytes
       record: node_memory_Mlocked
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_NFS_Unstable_bytes
       record: node_memory_NFS_Unstable
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_PageTables_bytes
       record: node_memory_PageTables
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Shmem_bytes
       record: node_memory_Shmem
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Slab_bytes
       record: node_memory_Slab
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_SReclaimable_bytes
       record: node_memory_SReclaimable
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_SUnreclaim_bytes
       record: node_memory_SUnreclaim
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_SwapCached_bytes
       record: node_memory_SwapCached
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_SwapFree_bytes
       record: node_memory_SwapFree
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_SwapTotal_bytes
       record: node_memory_SwapTotal
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Unevictable_bytes
       record: node_memory_Unevictable
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_VmallocChunk_bytes
       record: node_memory_VmallocChunk
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_VmallocTotal_bytes
       record: node_memory_VmallocTotal
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_VmallocUsed_bytes
       record: node_memory_VmallocUsed
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_Writeback_bytes
       record: node_memory_Writeback
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_memory_WritebackTmp_bytes
       record: node_memory_WritebackTmp
-      labels:
-        origin: {{ .Values.origin }}
   - name: node_exporter-16-network
     rules:
     - expr: node_network_receive_bytes_total
       record: node_network_receive_bytes
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_receive_compressed_total
       record: node_network_receive_compressed
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_receive_drop_total
       record: node_network_receive_drop
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_receive_errs_total
       record: node_network_receive_errs
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_receive_fifo_total
       record: node_network_receive_fifo
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_receive_frame_total
       record: node_network_receive_frame
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_receive_multicast_total
       record: node_network_receive_multicast
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_receive_packets_total
       record: node_network_receive_packets
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_transmit_bytes_total
       record: node_network_transmit_bytes
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_transmit_compressed_total
       record: node_network_transmit_compressed
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_transmit_drop_total
       record: node_network_transmit_drop
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_transmit_errs_total
       record: node_network_transmit_errs
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_transmit_fifo_total
       record: node_network_transmit_fifo
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_transmit_frame_total
       record: node_network_transmit_frame
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_transmit_multicast_total
       record: node_network_transmit_multicast
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_network_transmit_packets_total
       record: node_network_transmit_packets
-      labels:
-        origin: {{ .Values.origin }}
   - name: node_exporter-16-nfs
     rules:
     - expr: node_nfs_connections_total
       record: node_nfs_net_connections
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_nfs_packets_total
       record: node_nfs_net_reads
-      labels:
-        origin: {{ .Values.origin }}
     - expr: label_replace(label_replace(node_nfs_requests_total, "proto", "$1", "version",
         "(.+)"), "method", "$1", "procedure", "(.+)")
       record: node_nfs_procedures
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_nfs_rpc_authentication_refreshes_total
       record: node_nfs_rpc_authentication_refreshes
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_nfs_rpcs_total
       record: node_nfs_rpc_operations
-      labels:
-        origin: {{ .Values.origin }}
     - expr: node_nfs_rpc_retransmissions_total
       record: node_nfs_rpc_retransmissions
-      labels:
-        origin: {{ .Values.origin }}
   - name: node_exporter-16-textfile
     rules:
     - expr: node_textfile_mtime_seconds
       record: node_textfile_mtime
-      labels:
-        origin: {{ .Values.origin }}      
 {{ end }}
