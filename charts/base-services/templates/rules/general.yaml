@@ -4,6 +4,7 @@ kind: PrometheusRule
 metadata:
   labels:
     app: w3f
+    origin: {{ .Values.origin }}
   name: general
 spec:
   groups:
@@ -16,6 +17,7 @@ spec:
       for: 10m
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
     - alert: TargetDownLong
       annotations:
         message: '{{`{{ $value }}`}}% of the {{`{{ $labels.job }}`}} targets are down.'
@@ -23,4 +25,5 @@ spec:
       for: 15m
       labels:
         severity: critical
+        origin: {{ .Values.origin }}
 {{ end }}

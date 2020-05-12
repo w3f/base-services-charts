@@ -18,6 +18,7 @@ spec:
       for: 5m
       labels:
         severity: critical
+        origin: {{ .Values.origin }}
     - alert: AlertmanagerFailedReload
       annotations:
         message: Reloading Alertmanager's configuration has failed for {{`{{ $labels.namespace
@@ -27,15 +28,17 @@ spec:
       for: 10m
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
     - alert: heartbeat
       expr: vector(1)
       labels:
         severity: heartbeat
+        origin: {{ .Values.origin }}        
       annotations:
         message: Test alert. no action required
         summary: Test alert. no action required
         documentation: None
         runbook_url: "https://github.com/w3f/infrastructure/wiki/heartbeat-lost"
-        
-        
+
+
 {{ end }}

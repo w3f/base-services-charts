@@ -4,6 +4,7 @@ kind: PrometheusRule
 metadata:
   labels:
     app: w3f
+    origin: {{ .Values.origin }}
   name: kube-prometheus-node-alerting
 spec:
   groups:
@@ -18,6 +19,7 @@ spec:
       for: 30m
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
     - alert: NodeDiskRunningFull
       annotations:
         message: Device {{`{{ $labels.device }}`}} of node-exporter {{`{{ $labels.namespace }}`}}/{{`{{
@@ -27,4 +29,5 @@ spec:
       for: 10m
       labels:
         severity: critical
+        origin: {{ .Values.origin }}
 {{ end }}
