@@ -4,6 +4,7 @@ kind: PrometheusRule
 metadata:
   labels:
     app: w3f
+    origin: {{ .Values.origin }}
   name: kubernetes-apps
 spec:
   groups:
@@ -19,6 +20,7 @@ spec:
       for: 1h
       labels:
         severity: critical
+        origin: {{ .Values.origin }}
     - alert: KubePodNotReady
       annotations:
         message: Pod {{`{{ $labels.namespace }}`}}/{{`{{ $labels.pod }}`}} has been in a non-ready
@@ -29,6 +31,7 @@ spec:
       for: 1h
       labels:
         severity: critical
+        origin: {{ .Values.origin }}
     - alert: KubeDeploymentGenerationMismatch
       annotations:
         message: Deployment generation for {{`{{ $labels.namespace }}`}}/{{`{{ $labels.deployment
@@ -42,6 +45,7 @@ spec:
       for: 15m
       labels:
         severity: critical
+        origin: {{ .Values.origin }}
     - alert: KubeDeploymentReplicasMismatch
       annotations:
         message: Deployment {{`{{ $labels.namespace }}`}}/{{`{{ $labels.deployment }}`}} has not
@@ -54,6 +58,7 @@ spec:
       for: 1h
       labels:
         severity: critical
+        origin: {{ .Values.origin }}
     - alert: KubeStatefulSetReplicasMismatch
       annotations:
         message: StatefulSet {{`{{ $labels.namespace }}`}}/{{`{{ $labels.statefulset }}`}} has not
@@ -66,6 +71,7 @@ spec:
       for: 15m
       labels:
         severity: critical
+        origin: {{ .Values.origin }}
     - alert: KubeStatefulSetGenerationMismatch
       annotations:
         message: StatefulSet generation for {{`{{ $labels.namespace }}`}}/{{`{{ $labels.statefulset
@@ -79,6 +85,7 @@ spec:
       for: 15m
       labels:
         severity: critical
+        origin: {{ .Values.origin }}
     - alert: KubeStatefulSetUpdateNotRolledOut
       annotations:
         message: StatefulSet {{`{{ $labels.namespace }}`}}/{{`{{ $labels.statefulset }}`}} update
@@ -99,6 +106,7 @@ spec:
       for: 15m
       labels:
         severity: critical
+        origin: {{ .Values.origin }}
     - alert: KubeDaemonSetRolloutStuck
       annotations:
         message: Only {{`{{ $value }}`}}% of the desired Pods of DaemonSet {{`{{ $labels.namespace
@@ -111,6 +119,7 @@ spec:
       for: 15m
       labels:
         severity: critical
+        origin: {{ .Values.origin }}
     - alert: KubeDaemonSetNotScheduled
       annotations:
         message: '{{`{{ $value }}`}} Pods of DaemonSet {{`{{ $labels.namespace }}`}}/{{`{{ $labels.daemonset
@@ -123,6 +132,7 @@ spec:
       for: 10m
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
     - alert: KubeDaemonSetMisScheduled
       annotations:
         message: '{{`{{ $value }}`}} Pods of DaemonSet {{`{{ $labels.namespace }}`}}/{{`{{ $labels.daemonset
@@ -133,6 +143,7 @@ spec:
       for: 10m
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
     - alert: KubeCronJobRunning
       annotations:
         message: CronJob {{`{{ $labels.namespaces }}`}}/{{`{{ $labels.cronjob }}`}} is taking more
@@ -143,6 +154,7 @@ spec:
       for: 1h
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
     - alert: KubeJobCompletion
       annotations:
         message: Job {{`{{ $labels.namespaces }}`}}/{{`{{ $labels.job }}`}} is taking more than
@@ -153,6 +165,7 @@ spec:
       for: 1h
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
     - alert: KubeJobFailed
       annotations:
         message: Job {{`{{ $labels.namespaces }}`}}/{{`{{ $labels.job }}`}} failed to complete.
@@ -162,4 +175,5 @@ spec:
       for: 1h
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
 {{ end }}

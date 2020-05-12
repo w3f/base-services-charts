@@ -4,6 +4,7 @@ kind: PrometheusRule
 metadata:
   labels:
     app: w3f
+    origin: {{ .Values.origin }}
   name: prometheus-operator
 spec:
   groups:
@@ -17,6 +18,7 @@ spec:
       for: 10m
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
     - alert: PrometheusOperatorPrometheusReconcileErrors
       annotations:
         message: Errors while reconciling Prometheus in {{`{{ $labels.namespace }}`}} Namespace.
@@ -25,6 +27,7 @@ spec:
       for: 10m
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
     - alert: PrometheusOperatorNodeLookupErrors
       annotations:
         message: Errors while reconciling Prometheus in {{`{{ $labels.namespace }}`}} Namespace.
@@ -33,4 +36,5 @@ spec:
       for: 10m
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
 {{ end }}

@@ -4,6 +4,7 @@ kind: PrometheusRule
 metadata:
   labels:
     app: w3f
+    origin: {{ .Values.origin }}
   name: kubernetes-storage
 spec:
   groups:
@@ -23,6 +24,7 @@ spec:
       for: 1m
       labels:
         severity: critical
+        origin: {{ .Values.origin }}
     - alert: KubePersistentVolumeFullInEightDays
       annotations:
         message: Based on recent sampling, the PersistentVolume claimed by {{`{{ $labels.persistentvolumeclaim
@@ -34,4 +36,5 @@ spec:
       for: 30m
       labels:
         severity: critical
+        origin: {{ .Values.origin }}
 {{ end }}

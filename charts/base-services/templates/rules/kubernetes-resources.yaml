@@ -4,6 +4,7 @@ kind: PrometheusRule
 metadata:
   labels:
     app: w3f
+    origin: {{ .Values.origin }}
   name: kubernetes-resources
 spec:
   groups:
@@ -23,6 +24,7 @@ spec:
       for: 5m
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
     - alert: KubeMemOvercommit
       annotations:
         message: Cluster has overcommitted memory resource requests for Pods and cannot
@@ -39,6 +41,7 @@ spec:
       for: 5m
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
     - alert: KubeCPUOvercommit
       annotations:
         message: Cluster has overcommitted CPU resource requests for Namespaces.
@@ -51,6 +54,7 @@ spec:
       for: 5m
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
     - alert: KubeMemOvercommit
       annotations:
         message: Cluster has overcommitted memory resource requests for Namespaces.
@@ -63,6 +67,7 @@ spec:
       for: 5m
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
     - alert: KubeQuotaExceeded
       annotations:
         message: Namespace {{`{{ $labels.namespace }}`}} is using {{`{{ printf "%0.0f" $value
@@ -76,4 +81,5 @@ spec:
       for: 15m
       labels:
         severity: warning
+        origin: {{ .Values.origin }}
 {{ end }}
