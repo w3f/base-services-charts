@@ -18,5 +18,5 @@ spec:
           email: cloudflare@web3.foundation
           apiKeySecretRef:
             name: cloudflare-credentials
-            key: api-key
+            key: api-token
 {{ end }}
