@@ -16,7 +16,7 @@ spec:
     - dns01:
         cloudflare:
           email: cloudflare@web3.foundation
-          apiKeySecretRef:
+          apiTokenSecretRef:
             name: cloudflare-credentials
             key: api-token
 {{ end }}
