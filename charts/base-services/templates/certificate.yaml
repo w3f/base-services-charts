@@ -8,7 +8,6 @@ spec:
   secretName: w3f-tls
   issuerRef:
     name: letsencrypt
-    kind: ClusterIssuer
   dnsNames:
   - grafana.{{ .Values.grafana.domain }}
 {{ end }}
