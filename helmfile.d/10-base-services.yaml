@@ -8,7 +8,7 @@ releases:
   values:
   - environment: {{ .Environment.Name }}
   - grafanaPassword: {{ env "GRAFANA_PASSWORD" | default "admin" }}
-  - cloudflareApiKey: {{ env "CLOUDFLARE_API_KEY" | default "" }}
+  - cloudflareApiToken: {{ env "CLOUDFLARE_API_TOKEN" | default "" }}
   - digitalOceanToken: {{ env "DIGITALOCEAN_ACCESS_TOKEN" | default "token" }}
   - spacesAccessToken: {{ env "SPACES_ACCESS_TOKEN" | default "spaces_access_token" }}
   - spacesSecretKey: {{ env "SPACES_SECRET_KEY" | default "spaces_secret_key" }}

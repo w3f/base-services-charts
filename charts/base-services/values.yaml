@@ -7,7 +7,7 @@ grafana:
   password: password
   domain: web3.foundation
 
-cloudflareApiKey: ""
+cloudflareApiToken: ""
 
 alertRules:
   create: true
