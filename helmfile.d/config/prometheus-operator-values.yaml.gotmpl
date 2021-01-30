@@ -3,10 +3,12 @@ fullnameOverride: "prometheus-operator"
 
 defaultRules:
   create: false
+commonLabels:
+  group: w3f
 kubeDns:
-  enabled: false
-coreDns:
   enabled: true
+coreDns:
+  enabled: false
 kubeApiServer:
   enabled: false
 grafana:
@@ -16,114 +18,46 @@ nodeExporter:
 prometheus:
   prometheusSpec:
     ruleSelector:
-      matchExpresions:
+      matchExpressions:
       - key: app
         operator: In
         values:
         - w3f
         - prometheus-operator
     serviceMonitorSelector:
-      group: w3f
+      matchLabels:
+        group: w3f
 {{ if ne .Environment.Name "ci" }}
-    resources:
-      requests:
-        cpu: 500m
-        memory: 2Gi
-      limits:
-        cpu: 700m
-        memory: 3Gi
     storageSpec:
       volumeClaimTemplate:
         spec:
-          storageClassName: "do-block-storage"
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 20Gi
-{{ end }}
-alertmanager:
-  config:
-    global:
-      resolve_timeout: 5m
-      opsgenie_api_url: {{ env "OPSGENIE_API_URL" | default "https://api.eu.opsgenie.com/" }}
-      opsgenie_api_key: {{ env "OPSGENIE_TOKEN" | default "opsgenie_token" }}
-    route:
-      group_by: ['alertname', 'priority']
-      group_wait: 30s
-      group_interval: 5m
-      repeat_interval: 12h
-      receiver: default
-      routes:
-{{ if ne .Environment.Name "ci" }}
-      - receiver: heartbeats
-        match:
-          severity: heartbeat
-        group_wait: 1s
-        group_interval: 1m
-        repeat_interval: 50s
-      - receiver: opsgenie
-        match:
-          severity: critical
-        continue: true
-{{ end }}
-      - receiver: watcher
-        match:
-          app: polkadot-watcher
-        continue: true
-      - receiver: default
-
-    receivers:
-    - name: default
-      webhook_configs:
-      - url:  "http://matrixbot:8080/skill/alertmanager/webhook"
-    - name: watcher
-      webhook_configs:
-      - url:  "http://watcher-matrixbot:8080/skill/alertmanager/webhook"
-{{ if ne .Environment.Name "ci" }}
-    - name: heartbeats
-      webhook_configs:
-      - url: https://api.eu.opsgenie.com/v2/alerts/v2/heartbeats/engineering/ping'
-        send_resolved: true
-        http_config:
-          basic_auth:
-            password: {{ env "OPSGENIE_TOKEN" | default "opsgenie_token" }}
-    - name: opsgenie
-      opsgenie_configs:
-      - api_url:
-        api_key:
-        message: New Alert
-{{ end }}
-{{ if ne .Environment.Name "ci" }}
-  alertmanagerSpec:
-    resources:
-      limits:
-        cpu: 10m
-        memory: 400Mi
-      requests:
-        cpu: 10m
-        memory: 400Mi
-    storage:
-      volumeClaimTemplate:
-        spec:
-          storageClassName: "do-block-storage"
           accessModes: ["ReadWriteOnce"]
           resources:
             requests:
               storage: 10Gi
-prometheusOperator:
-  resources:
-    limits:
-      cpu: 200m
-      memory: 200Mi
-    requests:
-      cpu: 100m
-      memory: 100Mi
-kubeStateMetrics:
-  resources:
-    limits:
-      cpu: 10m
-      memory: 16Mi
-    requests:
-      cpu: 10m
-      memory: 16Mi
+    additionalScrapeConfigs:
+    {{- range $index, $value := .Environment.Values.validatorsKusama }}
+    - job_name: ne-{{ $value.name }}
+      basic_auth:
+        username: prometheus
+        password: {{ env "POLKADOT_NODE_EXPORTER_PASSWORD" | default "node_exporter" | quote }}
+      static_configs:
+      - targets:
+        - {{ $value.ip }}:9100
+        labels:
+          w3fnode: {{ $value.name }}
+    {{- end }}
+{{ end }}
+
+{{ if ne .Environment.Name "ci" }}
+  alertmanagerSpec:
+    logLevel: debug
+    replicas: 2
+    storage:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
 {{ end }}
