@@ -8,8 +8,8 @@ repositories:
 
 releases:
 - name: grafana
-  chart: stable/grafana
-  version: 2.3.5
+  chart: grafana/grafana
+  version: 6.1.17
   values:
   - ./config/grafana-values.yaml.gotmpl
 - name: loki

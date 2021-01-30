@@ -4,7 +4,7 @@ environments:
 
 releases:
 - name: prometheus-operator
-  chart: stable/prometheus-operator
-  version: 8.13.7
+  chart: prometheus-community/kube-prometheus-stack
+  version: 13.2.1
   values:
   - ./config/prometheus-operator-values.yaml.gotmpl
