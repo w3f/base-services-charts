@@ -6,8 +6,8 @@ metadata:
   namespace: default
 spec:
   acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
-    email: devops@web3.foundation
+    server: {{ .Values.issuer.acme.server }}
+    email: {{ .Values.issuer.acme.email }}
 
     privateKeySecretRef:
       name: letsencrypt
@@ -15,7 +15,7 @@ spec:
     solvers:
     - dns01:
         cloudflare:
-          email: cloudflare@web3.foundation
+          email: {{ .Values.issuer.solvers.cloudflare.email }}
           apiTokenSecretRef:
             name: cloudflare-credentials
             key: api-token
