@@ -2,6 +2,10 @@ environments:
   production:
   ci:
 
+repositories:
+- name: ingress-nginx
+  url: https://kubernetes.github.io/ingress-nginx
+
 releases:
 - name: base-services
   chart: ../charts/base-services
@@ -13,7 +17,7 @@ releases:
   - spacesAccessToken: {{ env "SPACES_ACCESS_TOKEN" | default "spaces_access_token" }}
   - spacesSecretKey: {{ env "SPACES_SECRET_KEY" | default "spaces_secret_key" }}
 - name: nginx-ingress
-  chart: stable/nginx-ingress
-  version: 1.4.0
+  chart: ingress-nginx/ingress-nginx
+  version: 3.19.0
   values:
   - ./config/nginx-ingress-values.yaml.gotmpl

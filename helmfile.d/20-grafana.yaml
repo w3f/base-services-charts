@@ -5,11 +5,13 @@ environments:
 repositories:
 - name: loki
   url: https://grafana.github.io/loki/charts
+- name: grafana
+  url: https://grafana.github.io/helm-charts  
 
 releases:
 - name: grafana
-  chart: stable/grafana
-  version: 2.3.5
+  chart: grafana/grafana
+  version: 6.1.17
   values:
   - ./config/grafana-values.yaml.gotmpl
 - name: loki

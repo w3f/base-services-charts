@@ -1,0 +1,45 @@
+image:
+  repository: velero/velero
+  tag: v1.4.0
+
+initContainers:
+   - name: velero-plugin-for-gcp
+     image: velero/velero-plugin-for-gcp:v1.1.0
+     volumeMounts:
+       - mountPath: /target
+         name: plugins
+
+configuration:
+  provider: gcp
+  backupStorageLocation:
+    name: gcp
+    bucket: engineering-backups
+
+  volumeSnapshotLocation:
+    name: gcp
+    config:
+      snapshotLocation: europe-west6
+
+{{ if ne .Environment.Name "ci" }}
+schedules:
+   backup:
+     schedule: "0 */6 * * *"
+     template:
+       ttl: "240h"
+       includedNamespaces:
+       - default
+       - kusama
+       - polkadot
+       - purchase
+{{ end }}
+
+rbac:
+  create: true
+
+deployRestic: true
+
+credentials:
+  useSecret: true
+  secretContents:
+    cloud: |
+      {{ env "VELERO_GCP_CREDENTIALS" | default "velero_access_token" }}
