@@ -8,5 +8,6 @@ repositories:
 
 releases:
 - name: cert-manager
+  namespace: cert-manager
   chart: jetstack/cert-manager
   version: v0.15.2
