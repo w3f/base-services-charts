@@ -5,6 +5,8 @@ environments:
 repositories:
 - name: loki
   url: https://grafana.github.io/loki/charts
+- name: grafana
+  url: https://grafana.github.io/helm-charts  
 
 releases:
 - name: grafana
