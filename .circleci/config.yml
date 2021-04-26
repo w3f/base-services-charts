@@ -32,6 +32,7 @@ workflows:
               only: /.*/
 
       - publishChart:
+          context: github-bot
           filters:
             branches:
               ignore: /.*/
