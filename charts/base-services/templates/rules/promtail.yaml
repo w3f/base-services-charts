@@ -6,7 +6,7 @@ metadata:
   labels:
 {{ toYaml .Values.alertRules.labels | indent 4 }}
     origin: {{ .Values.origin }}
-  name: {{ .Release.Name }}
+  name: promtail
 spec:
   groups:
   - name: promtail.rules
