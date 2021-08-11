@@ -11,10 +11,10 @@ spec:
   groups:
   - name: promtail.rules
     rules:
-    - alert: PromtailMonitoredErrors
+    - alert: PromtailCustomAppLogErrors
       annotations:
         message: '{{`{{ $labels.exported_job }}`}} is showing errors in the logs, please check the cluster {{`{{ $labels.origin }}`}}'
-      expr: increase(app_v2_log_errors_total[2m]) > 0
+      expr: increase(promtail_custom_app_log_errors_total[2m]) > 0
       for: 30s
       labels:
         severity: warning
