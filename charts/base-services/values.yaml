@@ -12,6 +12,8 @@ cloudflareApiToken: ""
 
 alertRules:
   create: true
+  labels:
+    app: w3f
 
 issuer:
   acme:

@@ -1,0 +1,22 @@
+
+{{ if and (ne .Values.environment "ci") ( .Values.alertRules.create ) }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+{{ toYaml .Values.labels | indent 4 }}
+    origin: {{ .Values.origin }}
+  name: {{ .Release.Name }}
+spec:
+  groups:
+  - name: promtail.rules
+    rules:
+    - alert: PromtailMonitoredErrors
+      annotations:
+        message: '{{`{{ $labels.exported_job }}`}} is showing errors in the logs, please check the cluster {{`{{ $labels.origin }}`}}'
+      expr: increase(app_v2_log_errors_total[2m]) > 0
+      for: 30s
+      labels:
+        severity: warning
+        origin: {{ .Values.origin }}
+{{ end }}
