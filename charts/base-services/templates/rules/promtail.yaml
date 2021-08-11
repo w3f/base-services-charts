@@ -4,7 +4,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
   labels:
-{{ toYaml .Values.labels | indent 4 }}
+{{ toYaml .Values.alertRules.labels | indent 4 }}
     origin: {{ .Values.origin }}
   name: {{ .Release.Name }}
 spec:
