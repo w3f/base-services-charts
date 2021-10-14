@@ -3,7 +3,6 @@ apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: letsencrypt
-  namespace: default
 spec:
   acme:
     server: {{ .Values.issuer.acme.server }}
