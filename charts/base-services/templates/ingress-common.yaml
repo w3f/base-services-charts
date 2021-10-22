@@ -28,5 +28,5 @@ spec:
           service:
             name: grafana
             port:
-              name: http
+              number: 80
 {{ end }}
