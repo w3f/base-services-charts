@@ -23,6 +23,7 @@ spec:
     http:
       paths:
       - path: /
+        pathType: Prefix
         backend:
           serviceName: grafana
           servicePort: 80
