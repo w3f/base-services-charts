@@ -17,7 +17,6 @@ main(){
         trap teardown EXIT
     fi
 
-    source ./scripts/preflight.sh
     source /scripts/build-helmfile.sh
 
     run_tests
