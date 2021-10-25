@@ -11,4 +11,5 @@ releases:
   namespace: cert-manager
   chart: jetstack/cert-manager
   version: v1.5.4
-  installCRDs: true
+  values:
+  - ./config/cert-manager-values.yaml.gotmpl
