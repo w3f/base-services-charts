@@ -27,7 +27,6 @@ kubeDns:
 nodeExporter:
   enabled: true
 prometheus-node-exporter:
-  namespaceOverride: "monitoring"
   podLabels:
     ## Add the 'node-exporter' label to be used by serviceMonitor to match standard common usage in rules and grafana dashboards
     ##
@@ -48,9 +47,7 @@ prometheusOperator:
 prometheus:
   enabled: true
   prometheusSpec:
-    ruleNamespaceSelector:
-    - default
-    - monitoring 
+    ruleNamespaceSelector: ["default", "monitoring"]
     ruleSelector:
       matchExpressions:
       - key: app
