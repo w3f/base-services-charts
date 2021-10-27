@@ -47,7 +47,6 @@ prometheusOperator:
 prometheus:
   enabled: true
   prometheusSpec:
-    ruleNamespaceSelector: ["default", "monitoring"]
     ruleSelector:
       matchExpressions:
       - key: app
