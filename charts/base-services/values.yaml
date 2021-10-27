@@ -2,12 +2,6 @@ environment: ci
 
 origin: base
 
-grafana:
-  enabled: true
-  password: password
-  domain: web3.foundation
-  exposeMetrics: false
-
 cloudflareApiToken: ""
 
 alertRules:
