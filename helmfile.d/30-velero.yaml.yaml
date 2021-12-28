@@ -1,16 +1,13 @@
 environments:
   production:
   ci:
-
 repositories:
-- name: vmware-tanzu
-  url: https://vmware-tanzu.github.io/helm-charts
-
+  - name: vmware-tanzu
+    url: https://vmware-tanzu.github.io/helm-charts
 releases:
-- name: velero
-  namespace: velero
-  chart: vmware-tanzu/velero
-  version: 2.12.0
-  values:
-  - ./config/velero/velero.yaml.gotmpl
-
+  - name: velero
+    namespace: velero
+    chart: vmware-tanzu/velero
+    version: 2.27.1
+    values:
+      - ./config/velero/velero.yaml.gotmpl
