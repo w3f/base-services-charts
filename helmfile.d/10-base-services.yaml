@@ -10,12 +10,7 @@ releases:
 - name: base-services
   chart: ../charts/base-services
   values:
-  - environment: {{ .Environment.Name }}
-  - grafanaPassword: {{ env "GRAFANA_PASSWORD" | default "admin" }}
-  - cloudflareApiToken: {{ env "CLOUDFLARE_API_TOKEN" | default "" }}
-  - digitalOceanToken: {{ env "DIGITALOCEAN_ACCESS_TOKEN" | default "token" }}
-  - spacesAccessToken: {{ env "SPACES_ACCESS_TOKEN" | default "spaces_access_token" }}
-  - spacesSecretKey: {{ env "SPACES_SECRET_KEY" | default "spaces_secret_key" }}
+  - ./config/base-service-values.yaml.gotmpl
 - name: nginx-ingress
   chart: ingress-nginx/ingress-nginx
   version: 3.19.0
