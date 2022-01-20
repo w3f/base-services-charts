@@ -6,6 +6,9 @@ metadata:
     app: w3f
     origin: {{ .Values.origin }}
   name: kubernetes-resources
+  {{ if .Values.alertRules.namespace }}
+  namespace: {{ .Values.alertRules.namespace }}
+  {{ end }}
 spec:
   groups:
   - name: kubernetes-resources

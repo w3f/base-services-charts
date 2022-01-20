@@ -5,6 +5,7 @@ origin: base
 cloudflareApiToken: ""
 
 alertRules:
+  namespace: monitoring # Optional | helmfile driven
   create: true
   labels:
     app: w3f

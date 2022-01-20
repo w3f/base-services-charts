@@ -6,6 +6,9 @@ metadata:
     app: w3f
     origin: {{ .Values.origin }}
   name: node-exporter
+  {{ if .Values.alertRules.namespace }}
+  namespace: {{ .Values.alertRules.namespace }}
+  {{ end }}
 spec:
   groups:
   - name: node_exporter-16-bcache
