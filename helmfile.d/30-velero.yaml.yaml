@@ -8,6 +8,6 @@ releases:
   - name: velero
     namespace: velero
     chart: vmware-tanzu/velero
-    version: 2.27.3
+    version: 2.27.4
     values:
       - ./config/velero/velero.yaml.gotmpl
