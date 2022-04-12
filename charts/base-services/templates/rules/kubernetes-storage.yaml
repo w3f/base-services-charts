@@ -38,6 +38,6 @@ spec:
         kubelet_volume_stats_available_bytes{job="kubelet"} and predict_linear(kubelet_volume_stats_available_bytes{job="kubelet"}[6h], 8 * 24 * 3600) < 0
       for: 60m
       labels:
-        severity: critical
+        severity: warning
         origin: {{ .Values.origin }}
 {{ end }}
