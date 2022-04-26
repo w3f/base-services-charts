@@ -32,7 +32,7 @@ spec:
       annotations:
         message: Based on recent sampling, the PersistentVolume claimed by {{`{{ $labels.persistentvolumeclaim
           }}`}} in Namespace {{`{{ $labels.namespace }}`}} is expected to fill up within eight
-          days. Currently {{`{{ $value }}`}} bytes are available.
+          days. Currently {{`{{ $value / 1024 / 1024 / 1024 }}`}} gigabytes are available.
         runbook_url: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubepersistentvolumefullinfourdays
       expr: |
         kubelet_volume_stats_available_bytes{job="kubelet"} and predict_linear(kubelet_volume_stats_available_bytes{job="kubelet"}[6h], 8 * 24 * 3600) < 0
