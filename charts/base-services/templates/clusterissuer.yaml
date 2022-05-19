@@ -13,10 +13,7 @@ spec:
       name: letsencrypt
 
     solvers:
-    - dns01:
-        cloudflare:
-          email: {{ .Values.issuer.solvers.cloudflare.email }}
-          apiTokenSecretRef:
-            name: cloudflare-credentials
-            key: api-token
+    - http01:
+        ingress:
+          class: nginx
 {{ end }}

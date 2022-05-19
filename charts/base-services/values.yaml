@@ -2,8 +2,6 @@ environment: ci
 
 origin: base
 
-cloudflareApiToken: ""
-
 alertRules:
   namespace: monitoring # Optional | helmfile driven
   create: true
@@ -14,7 +12,3 @@ issuer:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: devops@web3.foundation
-
-  solvers:
-    cloudflare:
-      email: cloudflare@web3.foundation    
