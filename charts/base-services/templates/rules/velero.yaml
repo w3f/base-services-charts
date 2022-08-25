@@ -1,0 +1,33 @@
+
+{{ if and (ne .Values.environment "ci") ( .Values.alertRules.create ) }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+{{ toYaml .Values.alertRules.labels | indent 4 }}
+    origin: {{ .Values.origin }}
+  name: velero
+  {{ if .Values.alertRules.namespace }}
+  namespace: {{ .Values.alertRules.namespace }}
+  {{ end }}
+spec:
+  groups:
+  - name: velero.rules
+    rules:
+    - alert: VeleroBackupPartialFailures
+      annotations:
+        message: 'Velero backup {{`{{ $labels.schedule }}`}} has {{`{{ $value | humanizePercentage }}`}} partialy failed backups, please check the cluster {{`{{ $labels.origin }}`}}'
+      expr: velero_backup_partial_failure_total{schedule!=""} / velero_backup_attempt_total{schedule!=""} > 0.25
+      for: 15m
+      labels:
+        severity: warning
+        origin: {{ .Values.origin }}
+    - alert: VeleroBackupFailures
+      annotations:
+        message: 'Velero backup {{`{{ $labels.schedule }}`}} has {{`{{ $value | humanizePercentage }}`}} failed backups, please check the cluster {{`{{ $labels.origin }}`}}'
+      expr: velero_backup_failure_total{schedule!=""} / velero_backup_attempt_total{schedule!=""} > 0.25
+      for: 15m
+      labels:
+        severity: warning
+        origin: {{ .Values.origin }}    
+{{ end }}

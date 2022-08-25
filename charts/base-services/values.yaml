@@ -3,7 +3,7 @@ environment: ci
 origin: base
 
 alertRules:
-  namespace: monitoring # Optional | helmfile driven
+  namespace: monitoring # Optional or default helmfile driven
   create: true
   labels:
     app: w3f
