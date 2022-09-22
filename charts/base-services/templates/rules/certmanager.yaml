@@ -1,0 +1,25 @@
+{{ if and (ne .Values.environment "ci") ( .Values.alertRules.create ) }}
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  labels:
+{{ toYaml .Values.alertRules.labels | indent 4 }}
+    origin: {{ .Values.origin }}
+  name: certmanager
+  {{ if .Values.alertRules.namespace }}
+  namespace: {{ .Values.alertRules.namespace }}
+  {{ end }}
+spec:
+  groups:
+  - name: certmanager.rules
+    rules:
+    - alert: CertManagerCertificateReadyStatus
+      annotations:
+        message: description: 'Certificate for "{{`{{ $labels.name }}`}}" is not ready.'
+        summary: Certificate is not ready
+      expr: certmanager_certificate_ready_status{condition="False"} == 1
+      for: 5m
+      labels:
+        severity: critical
+        origin: {{ .Values.origin }}  
+{{ end }}
