@@ -11,6 +11,6 @@ releases:
       - ./config/base-service-values.yaml.gotmpl
   - name: nginx-ingress
     chart: ingress-nginx/ingress-nginx
-    version: 4.2.1
+    version: 4.2.2
     values:
       - ./config/nginx-ingress-values.yaml.gotmpl
