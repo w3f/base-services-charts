@@ -1,6 +1,6 @@
 #https://docs.github.com/en/actions/using-workflows/reusing-workflows
 on:
-  workflow_dispatch:
+  workflow_call:
     secrets:
       PR_PAT:
         required: true
