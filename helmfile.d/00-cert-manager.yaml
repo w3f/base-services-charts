@@ -8,6 +8,6 @@ releases:
   - name: cert-manager
     namespace: cert-manager
     chart: jetstack/cert-manager
-    version: v1.9.1
+    version: ^v1.9.1
     values:
       - ./config/cert-manager-values.yaml.gotmpl
