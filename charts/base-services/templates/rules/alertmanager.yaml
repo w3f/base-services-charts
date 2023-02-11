@@ -42,7 +42,7 @@ spec:
         message: Test alert. no action required
         summary: Test alert. no action required
         documentation: None
-        runbook_url: "https://github.com/w3f/infrastructure/wiki/heartbeat-lost"
+        runbook_url: "https://github.com/w3f/SecOps/wiki/Opsgenie"
 
 
 {{ end }}
