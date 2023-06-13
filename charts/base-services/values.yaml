@@ -12,3 +12,9 @@ issuer:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     email: devops@web3.foundation
+
+# To generate the secret ingressbasicAuth below: first generate a secret in a vault
+# Run the following command to create a user splunk: "htpasswd -c auth splunk", the prompt will ask for previously created password
+lokiSecret:
+  namespace: monitoring # Optional or default helmfile driven
+  ingressbasicAuth: "splunk:$apr1$UG1axYuA$aVc/qRGWJbZsiHPjXtFPs/"
