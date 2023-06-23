@@ -17,4 +17,4 @@ issuer:
 # Run the following command to create a user splunk: "htpasswd -c auth splunk", the prompt will ask for previously created password
 lokiSecret:
   namespace: monitoring # Optional or default helmfile driven
-  ingressbasicAuth: "splunk:$apr1$D9wrsEMW$uyHsdPV2ixLXHs6WMzFkd1"
+  ingressbasicAuth: "splunk:$apr1$d6gF0q.9$0.BBqXMckeTP5e8EjiaRL0"
