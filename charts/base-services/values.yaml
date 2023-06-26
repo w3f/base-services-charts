@@ -2,6 +2,8 @@ environment: ci
 
 origin: base
 
+namespace: monitoring
+
 alertRules:
   namespace: monitoring # Optional or default helmfile driven
   create: true
@@ -14,7 +16,10 @@ issuer:
     email: devops@web3.foundation
 
 # To generate the secret ingressbasicAuth below: first generate a secret in a vault
-# Run the following command to create a user splunk: "htpasswd -c auth splunk", the prompt will ask for previously created password
-lokiSecret:
-  namespace: monitoring # Optional or default helmfile driven
-  ingressbasicAuth: "splunk:$apr1$d6gF0q.9$0.BBqXMckeTP5e8EjiaRL0"
+# Run the following command to create a user : "htpasswd -c auth splunk", the prompt will ask for previously created password
+# the secret is the usernama concatenated with the result of the previous command 
+# (for testing, add basic auth header with the base64 encoded string: "echo -n "user:hashPassword" | base64"
+secrets:
+  - name: my-secret-name
+    secret: "user:$apr1$d6gF0q.9$0.123412341234"
+
