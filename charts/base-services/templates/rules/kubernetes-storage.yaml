@@ -18,7 +18,6 @@ spec:
         message: The PersistentVolume claimed by {{`{{ $labels.persistentvolumeclaim }}`}}
           in Namespace {{`{{ $labels.namespace }}`}} is only {{`{{ printf "%0.0f" $value }}`}}%
           free.
-        runbook_url: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubepersistentvolumeusagecritical
       expr: |
         100 * kubelet_volume_stats_available_bytes{job="kubelet"}
           /
@@ -33,7 +32,6 @@ spec:
         message: Based on recent sampling, the PersistentVolume claimed by {{`{{ $labels.persistentvolumeclaim
           }}`}} in Namespace {{`{{ $labels.namespace }}`}} is expected to fill up within eight
           days. Currently {{`{{ $value | humanize1024 }}`}}B are available.
-        runbook_url: https://github.com/kubernetes-monitoring/kubernetes-mixin/tree/master/runbook.md#alert-name-kubepersistentvolumefullinfourdays
       expr: |
         kubelet_volume_stats_available_bytes{job="kubelet"} and predict_linear(kubelet_volume_stats_available_bytes{job="kubelet"}[6h], 8 * 24 * 3600) < 0
       for: 60m
