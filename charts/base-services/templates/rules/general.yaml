@@ -15,7 +15,7 @@ spec:
     rules:
     - alert: TargetDownShort
       annotations:
-        message: '{{`{{ $value }}`}}% of the {{`{{ $labels.job }}`}} targets are down.'
+        message: '{{`{{ $value }}`}}% of the {{`{{ $labels.job }}`}} targets are down in namespace {{`{{ $labels.namespace }}`}}.'
       expr: 100 * (count(up == 0) BY (job) / count(up) BY (job)) > 10
       for: 10m
       labels:
@@ -23,7 +23,7 @@ spec:
         origin: {{ .Values.origin }}
     - alert: TargetDownLong
       annotations:
-        message: '{{`{{ $value }}`}}% of the {{`{{ $labels.job }}`}} targets are down.'
+        message: '{{`{{ $value }}`}}% of the {{`{{ $labels.job }}`}} targets are down in namespace {{`{{ $labels.namespace }}`}}.'
       expr: 100 * (count(up == 0) BY (job) / count(up) BY (job)) > 10
       for: 15m
       labels:
