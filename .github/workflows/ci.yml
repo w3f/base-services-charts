@@ -1,0 +1,38 @@
+# Pull requests lint and render the chart. master pushes also publish it; a version that is
+# already published is skipped, so bump `version` in Chart.yaml to release.
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  chart:
+    name: Chart lint and render
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: azure/setup-helm@9bc31f4ebc9c6b171d7bfbaa5d006ae7abdb4310 # v5
+        with:
+          version: v3.17.3
+      - run: helm lint charts/base-services
+      - run: helm template base-services charts/base-services
+
+  publish-chart:
+    name: Publish Helm chart
+    if: ${{ github.ref == 'refs/heads/master' }}
+    needs: [chart]
+    uses: w3f/helm-charts/.github/workflows/publish-chart.yml@master
+    with:
+      chart-path: charts/base-services
+    secrets:
+      HELM_CHARTS_TOKEN: ${{ secrets.HELM_CHARTS_TOKEN }}
